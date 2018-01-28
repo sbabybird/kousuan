@@ -1,0 +1,9 @@
+.ti-row {
+    margin: 20px;
+    font-size: 200%;
+}
+
+.container {
+    width: auto;
+    max-width: 680px;
+}
