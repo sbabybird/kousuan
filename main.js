@@ -1,39 +1,29 @@
-var tpl = '<div class="row ti-row"><div class="col-2"></div><div class="col-4">$1×$2=</div><div class="col-4">$3÷$4=</div><div class="col-2"></div></div>';
+var tpl = '<div class="row ti-row"><div class="col-2"></div><div class="col-4">$1×$2=</div><span style="width:50px;"></span><div class="col-4">$3÷$4=</div><div class="col-2"></div></div>';
 
-function getShiwei() {
-    var n = parseInt(Math.random()*10);
-    while(n<1) {
-        n = parseInt(Math.random()*10);
-    }
-    return n;
-}
-
-function getGewei(shiwei) {
-    var n = parseInt(Math.random()*10);
-
-    if (shiwei > 5) {
-        n = 0;
-    } else {
-        while(n<1) {
-            n = parseInt(Math.random()*10);
-        }
-    }
-    return n;
+function getNum(min, max) {
+    return Math.floor(Math.random()*(max-min))+min;
 }
 
 $(document).ready(function() {
     for (var i = 0; i<20; i++) {
-        var n1 = getShiwei();
-        var m1 = getGewei(n1);
-        var s1 = n1.toString() + m1.toString();
-        var n2 = getShiwei();
-        var m2 = getGewei(n2);
-        var s2 = n2.toString() + m2.toString();
-        var n3 = getShiwei();
-        var m3 = getGewei(n3);
-        var n4 = getShiwei();
-        var s3 = n3.toString() + m3.toString();
-        var s4 = n4.toString();
+        var n1 = getNum(1, 9);
+        var s1 = n1.toString();
+        if (n1 >= 5) {
+            s1 += '0';
+        } else {
+            s1 += getNum(1, 5);
+        }
+        var n2 = getNum(1, 9);
+        var s2 = n2.toString();
+        if (n1 >= 5) {
+            s2 += '0';
+        } else {
+            s2 += ' ';
+        }
+        var n3 = getNum(1, 15);
+        var m3 = getNum(1, 8);
+        var s3 = Math.floor(n3*m3).toString();
+        var s4 = m3.toString();
         $('#ti').append(tpl.replace("$1", s1).replace("$2", s2).replace("$3", s3).replace("$4", s4));
     }
 });
